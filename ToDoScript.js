@@ -1,6 +1,9 @@
 window.onload = loadTasks;
+
 // Sivu noutaa kaikki tehtävät localStorage:sta sovelluksen ladatessa 
 function loadTasks() {
+    // tarkista localStorage tehtävät
+    if (localStorage.getItem("tasks") == null) return;
     // Noutaa tehtävät localStoragesta siirtäen tiedot "jonoon"
     let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
 
@@ -20,10 +23,14 @@ function addTask() {
     const list = document.querySelector("ul");
     // palauta, jos tehtävä on tyhjä
     if (task.value === "") {
-        alert("Please add task!");
+        alert("Please add a task!");
         return false;
     }
     // tarkista onko tehtävää jo olemassa
+    if (document.querySelector('input[value="${task.value}"]')) {
+        alert("Task exists!");
+        return false;
+    }
     let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
     // jos tehtävä on jo olemassa
     tasks.forEach(todo => {
