@@ -1,5 +1,11 @@
 window.onload = loadTasks;
 
+    // Lisää 'submit' -tapahtumakäsittelijä lomakkeelle
+    document.querySelector("form").addEventListener("submit", e => {
+        e.preventDefault();
+        addTask();
+    });
+
 // Sivu noutaa kaikki tehtävät localStorage:sta sovelluksen ladatessa 
 function loadTasks() {
     // tarkista localStorage tehtävät
@@ -53,11 +59,7 @@ function addTask() {
     task.value = "";
     }
 
-    // Lisää 'submit' -tapahtumakäsittelijä lomakkeelle
-    document.querySelector("form").addEventListener("submit", e => {
-        e.preventDefault();
-        addTask();
-    });
+
 
     // säilytä nykyinen tehtävä muutosten seuraamiseksi
     var currentTask = null;
@@ -119,3 +121,5 @@ function addTask() {
         localStorage.setItem("tasks", JSON.stringify(tasks));
         event.parentElement.remove();
     }
+    // päivitä localStorage
+    localStorage.setItem("tasks", JSON.stringify(tasks));
