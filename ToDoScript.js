@@ -17,8 +17,8 @@ function loadTasks() {
     tasks.forEach(task => {
         const list = document.querySelector("ul");
         const li = document.createElement("li");
-        li.innerHTML = `<input type="checkbox" onclick="taskComplete(this)" class="check" ${task.completed ? 'checked' : ''}>
-        <input type="text" value="${task.task}" class="task ${task.completed ? 'completed' : ''}" onfocus="getCurrentTask(this)" onblur="editTask(this)">
+        li.innerHTML = `<input type="checkbox" onclick="taskComplete(this)" class="check" ${task.completed ? "checked" : ""}>
+        <input type="text" value="${task.task}" class="task ${task.completed ? "completed" : ""}" onfocus="getCurrentTask(this)" onblur="editTask(this)">
         <i class="fa fa-trash" onclick="removeTask(this)"></i>`;
         list.insertBefore(li, list.children[0]);
     });
@@ -37,6 +37,9 @@ function addTask() {
         alert("Task exists!");
         return false;
     }
+        // lisää tehtävä localStorage:n
+        localStorage.setItem("tasks", JSON.stringify([...JSON.parse(localStorage.getItem("tasks")) || "[]", { task: task.value, completed: false }]));
+
     let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
     // jos tehtävä on jo olemassa
     tasks.forEach(todo => {
@@ -46,11 +49,9 @@ function addTask() {
             return;
         }
     });
-
-    // lisää tehtävä localStorage:n
-    localStorage.setItem("tasks", JSON.stringify([...JSON.parse(localStorage.getItem("tasks")) || "[]", { task: task.value, completed: false }]));
-
+    
     // luo lista, lisää innerHTML ja liitä ul:ään
+    const li = document.createElement("li");
     li.innerHTML = `<input type="checkbox" onclick="taskComplete(this)" class="check">
         <input type="text" value="${task.value}" class="task" onfocus="getCurrentTask(this)" onblur="editTask(this)">
         <i class="fa fa-trash" onclick="removeTask(this)"></i>`;
@@ -58,9 +59,6 @@ function addTask() {
     // tyhjä syöte
     task.value = "";
     }
-
-
-
     // säilytä nykyinen tehtävä muutosten seuraamiseksi
     var currentTask = null;
 
