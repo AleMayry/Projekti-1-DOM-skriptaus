@@ -38,17 +38,10 @@ function addTask() {
         return false;
     }
         // lisää tehtävä localStorage:n
-        localStorage.setItem("tasks", JSON.stringify([...JSON.parse(localStorage.getItem("tasks")) || "[]", { task: task.value, completed: false }]));
+        localStorage.setItem("tasks", JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]"), { task: task.value, completed: false }]));
 
     let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
-    // jos tehtävä on jo olemassa
-    tasks.forEach(todo => {
-        if (todo.task === task.value) {
-            alert("Task exists!");
-            task.value = "";
-            return;
-        }
-    });
+
     
     // luo lista, lisää innerHTML ja liitä ul:ään
     const li = document.createElement("li");
@@ -58,42 +51,6 @@ function addTask() {
     list.insertBefore(li, list.children[0]);
     // tyhjä syöte
     task.value = "";
-    }
-    // säilytä nykyinen tehtävä muutosten seuraamiseksi
-    var currentTask = null;
-
-    // nouda nykyinen tehtävä
-    function getCurrentTask(event) {
-        currentTask = event.value;
-    }
-
-    // muokkaa tehtävää ja päivitä localStorage
-    function editTask(event) {
-        let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
-        // tarkista onko tehtäväsyöttö tyhjä
-        if (event.value === "") {
-            alert("Empty task!");
-            event.value = currentTask;
-            return;
-        }
-        // Tehtävä on olemassa
-        tasks.forEach(task => {
-            if (task.task === event.value) {
-                alert("Task exists!");
-                event.value = currentTask;
-                return;
-            }
-        });
-
-        // päivitä tehtävä
-        tasks.forEach(task => {
-            if (task.task === currentTask) {
-                task.task = event.value;
-            }
-        });
-
-        // päivitä localStorage
-        localStorage.setItem("tasks", JSON.stringify(tasks));
     }
 
     // tehtävä valmis
@@ -119,5 +76,41 @@ function addTask() {
         localStorage.setItem("tasks", JSON.stringify(tasks));
         event.parentElement.remove();
     }
-    // päivitä localStorage
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+        // säilytä nykyinen tehtävä muutosten seuraamiseksi
+        var currentTask = null;
+
+        // nouda nykyinen tehtävä
+        function getCurrentTask(event) {
+            currentTask = event.value;
+        }
+    
+        // muokkaa tehtävää ja päivitä localStorage
+        function editTask(event) {
+            let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
+            // tarkista onko tehtäväsyöttö tyhjä
+            if (event.value === "") {
+                alert("Empty input!");
+                event.value = currentTask;
+                return;
+            }
+            // Tehtävä on olemassa
+            tasks.forEach(task => {
+                if (task.task === event.value) {
+                    alert("Task exists!");
+                    event.value = currentTask;
+                    return;
+                }
+            });
+    
+            // päivitä tehtävä
+            tasks.forEach(task => {
+                if (task.task === currentTask) {
+                    task.task = event.value;
+                }
+            });
+    
+            // päivitä localStorage
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+    
+
