@@ -1,3 +1,4 @@
+// Sivu noutaa kaikki tehtävät localStorage:sta sovelluksen ladatessa 
 window.onload = loadTasks;
 
     // Lisää 'submit' -tapahtumakäsittelijä lomakkeelle
@@ -6,7 +7,6 @@ window.onload = loadTasks;
         addTask();
     });
 
-// Sivu noutaa kaikki tehtävät localStorage:sta sovelluksen ladatessa 
 function loadTasks() {
     // tarkista localStorage tehtävät
     if (localStorage.getItem("tasks") == null) return;
@@ -33,15 +33,12 @@ function addTask() {
         return false;
     }
     // tarkista onko tehtävää jo olemassa
-    if (document.querySelector('input[value="${task.value}"]')) {
+    if (document.querySelector(`input[value="${task.value}"]`)) {
         alert("Task exists!");
         return false;
     }
         // lisää tehtävä localStorage:n
         localStorage.setItem("tasks", JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]"), { task: task.value, completed: false }]));
-
-    let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
-
     
     // luo lista, lisää innerHTML ja liitä ul:ään
     const li = document.createElement("li");
