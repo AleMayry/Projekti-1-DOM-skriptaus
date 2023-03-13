@@ -71,6 +71,7 @@
 }
 
 .check {
+    -webkit-appearance: none;
     width: 0.8em;
     height: 0.8em;
     cursor: pointer;
@@ -80,7 +81,7 @@
 }
 
 .check:checked {
-    background-color: #c4b7a6;
+    background-color: rgb(255, 82, 82);
 }
 
 .task {
