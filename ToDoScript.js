@@ -37,6 +37,7 @@ function addTask() {
         alert("Task exists!");
         return false;
     }
+
         // lisää tehtävä localStorage:n
         localStorage.setItem("tasks", JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]"), { task: task.value, completed: false }]));
     

@@ -40,7 +40,7 @@
 }
 
 .app form input {
-    border: #3e4444 solid 1px ;
+    border: none ;
     background-color: #b9936c;
     font-size: 18px;
     color: white;
