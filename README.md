@@ -21,3 +21,6 @@ Projekti julkaistu Netlify palvelussa.
 https://harmonious-cupcake-b0602f.netlify.app
 
 Projekti on keskeneräinen. Lisättäviä ominaisuuksia tulevat olemaan esim. tehtävien suodattaminen. Suodatuselementit tulevat olemaan All, Active ja Completed
+
+Netlify site deploy badge:
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ca6bd11a-21ad-4f45-87bc-9d6c2228599f/deploy-status)](https://app.netlify.com/sites/harmonious-cupcake-b0602f/deploys)
